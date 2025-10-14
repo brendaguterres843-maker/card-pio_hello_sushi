@@ -1,6 +1,6 @@
 // Lista de produtos
 const produtos = [
-  { nome: "Drink de Abacaxi", preco: 19.90, categoria: "Drinks", img: "https://github.com/brendaguterres843-maker/card-pio_hello_sushi/blob/main/drink-de-abacaxi.jpeg?raw=true", descricao: "Refrescante drink tropical com abacaxi natural e toque especial Hellkit." },
+  { nome: "Drink de Abacaxi", preco: 19.90, categoria: "Drinks", img: "https://github.com/brendaguterres843-maker/card-pio_hello_sushi/blob/main/drink-de-abacaxi.jpeg", descricao: "Refrescante drink tropical com abacaxi natural e toque especial Hellkit." },
   { nome: "Drink de Cereja", preco: 21.50, categoria: "Drinks", img: "Imagens/Drink-cereja.jpeg", descricao: "Doce e marcante, com licor de cereja e finalização delicada." },
   { nome: "Drink Caveira de Cereja", preco: 25.00, categoria: "Drinks", img: "Imagens/Drink-gela-cranio-de-cereja.jpeg", descricao: "Servido em copo caveira, mistura gelada e intensa de cereja." },
   { nome: "Drink de Uva", preco: 18.00, categoria: "Drinks", img: "Imagens/drink-uva.jpeg", descricao: "Sabor marcante de uvas frescas, levemente adocicado e refrescante." },
@@ -116,4 +116,5 @@ btnFinalizarPedido.addEventListener("click", () => {
 // Inicializa
 mostrarProdutos(produtos);
 atualizarCarrinho();
+
 
