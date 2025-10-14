@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Hellkit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <img src="Imagens/Logo.jpeg" alt="Logo Hellkit" class="logo">
+    <h1>Cardápio Hellkit</h1>
+    <a href="admin.html" class="btn-admin">Admin</a>
+    <div class="carrinho" id="btn-carrinho">
+      🛒 <span id="total-itens">0</span>
+    </div>
+  </header>
+
+  <div class="barra-filtros">
+    <input type="text" placeholder="Pesquisar produto..." id="pesquisa" class="pesquisa">
+    <div class="filtros">
+      <button class="btn-filtro" data-categoria="Todos">Todos</button>
+      <button class="btn-filtro" data-categoria="Drinks">Drinks</button>
+      <button class="btn-filtro" data-categoria="Sushi">Sushi</button>
+    </div>
+  </div>
+
+  <main id="menu-produtos" class="menu"></main>
+
+  <!-- Modal do Carrinho -->
+  <div id="modal-carrinho" class="modal-carrinho" style="display:none;">
+    <h2>Carrinho</h2>
+    <div id="itens-carrinho"></div>
+    <div class="total">
+      Total: R$ <span id="valor-total">0,00</span>
+    </div>
+    <button id="finalizar-pedido">Finalizar Pedido</button>
+    <button id="fechar-carrinho">Fechar</button>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

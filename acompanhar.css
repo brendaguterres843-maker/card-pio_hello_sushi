@@ -1,0 +1,125 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.header .logo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.btn-voltar {
+  text-decoration: none;
+  color: #ff4081;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Timeline do status */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 4px;
+  background-color: #ddd;
+  z-index: 0;
+  border-radius: 2px;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  flex: 1;
+  color: #aaa;
+  transition: all 0.3s ease;
+}
+
+.step i {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 5px;
+  background-color: #ddd;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 auto 5px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.step.active i {
+  background-color: #ff4081;
+  transform: scale(1.2);
+}
+
+.step.active span {
+  color: #ff4081;
+  font-weight: bold;
+}
+
+/* Timer */
+.timer {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.timer span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4081;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* Detalhes do pedido */
+.detalhes-pedido ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#detalhes-pedido li {
+  background-color: #fff;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-weight: 500;
+}

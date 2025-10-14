@@ -1,0 +1,259 @@
+/* ---------- GERAL ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+  background-color: #fff0f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- CABEÇALHO ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffe4f0;
+  padding: 12px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 50px;
+  border-radius: 10px;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  color: #e91e63;
+  text-align: center;
+  flex: 1;
+}
+
+.btn-voltar {
+  text-decoration: none;
+  background: #ff77aa;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.btn-voltar:hover {
+  background: #ff5c98;
+}
+
+/* ---------- CONTAINER PRINCIPAL ---------- */
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.painel {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  gap: 20px;
+}
+
+/* ---------- LISTA DE ITENS ---------- */
+.lista-itens {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 16px;
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+.lista-itens h2 {
+  margin-bottom: 10px;
+  color: #e91e63;
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffe4f0;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.item-info h3 {
+  font-size: 1rem;
+  color: #e91e63;
+}
+
+.item-info p {
+  font-size: 0.85rem;
+}
+
+.quantidade-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.quantidade-controls button {
+  background-color: #ff77aa;
+  border: none;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.quantidade-controls button:hover {
+  background-color: #ff5c98;
+}
+
+.preco {
+  font-weight: bold;
+  color: #e91e63;
+}
+
+/* ---------- BOTÃO LIMPAR ---------- */
+.btn-limpar {
+  background-color: #ff77aa;
+  color: #fff;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s;
+}
+
+.btn-limpar:hover {
+  background-color: #ff5c98;
+}
+
+/* ---------- PAINEL LATERAL ---------- */
+.painel-lateral {
+  flex: 1 1 35%;
+  min-width: 280px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+/* ---------- BOTÕES ---------- */
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+}
+
+.btn-fechar {
+  background: #ccc;
+}
+
+.btn-finalizar {
+  background: #e91e63;
+  color: #fff;
+}
+
+/* ---------- FORMULÁRIO / OBSERVAÇÕES ---------- */
+.painel-aba {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 10px;
+}
+
+.observacao {
+  resize: vertical;
+  min-height: 80px;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ---------- UTILITÁRIOS ---------- */
+.hidden {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+@media (max-width: 1024px) {
+  .painel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .painel {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item-img {
+    width: 50px;
+    height: 50px;
+  }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagamento - Hellkit</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Arial',sans-serif; }
+body { background:#fff0f5; color:#333; padding-bottom:50px; }
+
+.header { display:flex; align-items:center; justify-content:space-between; padding:20px 30px; background:#ffe4f0; border-bottom:1px solid #f0cce0; box-shadow:0 4px 6px rgba(0,0,0,0.08); position:sticky; top:0; }
+.header .logo { height:50px; }
+.header h1 { font-size:24px; font-weight:bold; color:#e6007a; flex:1; text-align:center; }
+.btn-voltar { text-decoration:none; color:#555; font-weight:bold; padding:6px 12px; border-radius:6px; border:1px solid #f0cce0; transition:0.2s; }
+.btn-voltar:hover { background:#e6007a; color:#fff; border-color:#e6007a; }
+
+.container { display:flex; justify-content:space-between; padding:20px 30px; gap:20px; }
+.coluna-esquerda, .painel-lateral { background:#fff; border-radius:12px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.05); }
+.coluna-esquerda { width:60%; }
+.painel-lateral { width:35%; }
+
+.painel-aba { margin-bottom:25px; }
+.painel-aba h2,h3 { color:#e6007a; margin-bottom:10px; }
+
+.form-row { margin-bottom:15px; }
+.form-row label { display:block; margin-bottom:4px; font-weight:600; color:#e6007a; font-size:14px; }
+.form-row input { width:100%; padding:10px; font-size:14px; border-radius:6px; border:1px solid #f0cce0; transition:0.2s; }
+.form-row input:focus { border-color:#e6007a; box-shadow:0 0 5px rgba(230,0,122,0.2); outline:none; }
+.input-erro { border-color:red !important; }
+
+button { padding:10px 16px; font-size:14px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.2s; }
+#btn-buscar-cep, #btn-manual { background:#e6007a; color:#fff; margin-top:5px; margin-right:5px; }
+#btn-buscar-cep:hover, #btn-manual:hover { background:#cc006d; }
+#btn-finalizar { background:#e6007a; color:#fff; width:100%; margin-top:10px; }
+#btn-finalizar:hover { background:#cc006d; }
+
+#pix-qrcode img { max-width:60%; border-radius:6px; margin-bottom:10px; border:2px solid #f0cce0; cursor:pointer; }
+#gerar-novo { display:none; background:#e6007a; color:#fff; padding:6px 10px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; margin-top:5px; }
+#gerar-novo:hover { background:#cc006d; }
+
+#pix-timer { font-weight:600; color:#e6007a; text-align:center; margin-top:5px; }
+input[type="radio"] { margin-right:6px; accent-color:#e6007a; }
+
+#barra-loading { width:100%; background:#f0cce0; border-radius:6px; overflow:hidden; height:16px; margin-top:10px; display:none; }
+#barra-loading span { display:block; height:100%; width:0%; background:#e6007a; transition:width 0.3s; }
+
+.hidden { display:none; }
+
+#resumo-itens p { margin-bottom:5px; }
+
+@media(max-width:768px){ .container{ flex-direction:column; } .coluna-esquerda, .painel-lateral{ width:100%; } }
+
+#confirmacao-pagamento {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;
+  z-index:9999; display:none;
+}
+#confirmacao-pagamento .conteudo {
+  background:#fff; padding:40px 30px; border-radius:12px; text-align:center;
+  width:90%; max-width:400px;
+}
+#confirmacao-pagamento h1 { color:#e6007a; margin-bottom:20px; }
+#confirmacao-pagamento p { margin-bottom:30px; }
+#confirmacao-pagamento button {
+  background:#e6007a; color:#fff; padding:12px 20px; border:none; border-radius:6px;
+  font-weight:bold; cursor:pointer; font-size:16px;
+}
+#confirmacao-pagamento button:hover { background:#cc006d; }
+</style>
+</head>
+<body>
+
+<header class="header">
+<img src="Imagens/Logo.jpeg" alt="Logo Hellkit" class="logo">
+<h1>Pagamento</h1>
+<a href="carrinho.html" class="btn-voltar">⬅ Voltar ao Carrinho</a>
+</header>
+
+<main class="container">
+<section class="coluna-esquerda">
+  <div class="painel-aba">
+    <h3>Nome do Recebedor</h3>
+    <div class="form-row">
+      <input type="text" id="nome-entrega" placeholder="Nome completo do recebedor">
+    </div>
+  </div>
+
+  <div class="painel-aba">
+    <h3>Endereço de Entrega</h3>
+    <div class="form-row">
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" placeholder="Digite o CEP" inputmode="numeric">
+      <button type="button" id="btn-buscar-cep">Buscar CEP</button>
+      <button type="button" id="btn-manual">Não usar CEP</button>
+    </div>
+    <div class="form-row"><label for="rua">Rua</label><input type="text" id="rua" disabled></div>
+    <div class="form-row"><label for="numero">Número</label><input type="text" id="numero" placeholder="Número da casa" disabled></div>
+    <div class="form-row"><label for="telefone">Telefone</label><input type="text" id="telefone" placeholder="(00) 00000-0000" inputmode="tel"></div>
+  </div>
+</section>
+
+<aside class="painel-lateral">
+<div class="painel-aba">
+  <h3>Resumo do Pedido</h3>
+  <div id="resumo-itens"></div>
+  <div class="total-row" style="margin-top:10px; font-weight:bold;">
+    Total: R$ <span id="total-pagamento">0,00</span>
+  </div>
+</div>
+
+<div class="painel-aba">
+  <h3>Forma de Pagamento</h3>
+  <label><input type="radio" name="pagamento" value="pix" checked> PIX</label>
+  <label><input type="radio" name="pagamento" value="cartao"> Cartão</label>
+</div>
+
+<div class="painel-aba" id="painel-pix">
+  <h3>PIX</h3>
+  <div id="pix-qrcode"><img src="Imagens/qr_code.jpg" alt="QR Code PIX"></div>
+  <button id="gerar-novo">Gerar Novo QR Code</button>
+  <div id="pix-timer">Tempo restante: <span id="timer">30</span>s</div>
+</div>
+
+<div class="painel-aba hidden" id="painel-cartao">
+  <h3>Dados do Cartão</h3>
+  <div class="form-row"><label for="nome-cartao">Nome no Cartão</label><input type="text" id="nome-cartao" placeholder="Nome completo"></div>
+  <div class="form-row"><label for="numero-cartao">Número</label><input type="text" id="numero-cartao" maxlength="19" placeholder="0000 0000 0000 0000"></div>
+  <div class="form-row"><label for="validade">Validade (MM/AA)</label><input type="text" id="validade" maxlength="5" placeholder="MM/AA"></div>
+  <div class="form-row"><label for="cvv">CVV</label><input type="text" id="cvv" maxlength="4" placeholder="123"></div>
+</div>
+
+<button id="btn-finalizar">Finalizar Pagamento</button>
+<div id="barra-loading"><span></span></div>
+</aside>
+</main>
+
+<div id="confirmacao-pagamento">
+  <div class="conteudo">
+    <h1>Pagamento Concluído!</h1>
+    <p>Seu pedido foi recebido com sucesso.</p>
+    <button id="btn-acompanhar">Acompanhe sua entrega</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+
+  const cepInput=document.getElementById("cep");
+  const btnCep=document.getElementById("btn-buscar-cep");
+  const btnManual=document.getElementById("btn-manual");
+  const ruaInput=document.getElementById("rua");
+  const numeroInput=document.getElementById("numero");
+  const telefoneInput=document.getElementById("telefone");
+
+  const painelPix=document.getElementById("painel-pix");
+  const painelCartao=document.getElementById("painel-cartao");
+  const btnFinal=document.getElementById("btn-finalizar");
+  const qrDiv=document.getElementById("pix-qrcode");
+  const btnGerarNovo=document.getElementById("gerar-novo");
+  const timerEl=document.getElementById("timer");
+
+  const confirmDiv=document.getElementById("confirmacao-pagamento");
+  const btnAcompanhar=document.getElementById("btn-acompanhar");
+
+  let tempo=30;
+
+  // ---------- Buscar CEP ----------
+  btnCep.addEventListener("click", async ()=>{
+    const cep=cepInput.value.replace(/\D/g,'');
+    if(cep.length!==8){ alert("CEP inválido"); return; }
+    try{
+      const resp=await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data=await resp.json();
+      if(data.erro){ alert("CEP não encontrado"); return; }
+      ruaInput.value=data.logradouro;
+      numeroInput.disabled=false;
+    }catch(err){ alert("Erro ao buscar CEP"); console.error(err); }
+  });
+
+  // ---------- Não usar CEP ----------
+  btnManual.addEventListener("click", ()=>{
+    ruaInput.disabled=false;
+    numeroInput.disabled=false;
+    cepInput.value='';
+  });
+
+  // ---------- Alternar PIX/Cartão ----------
+  document.querySelectorAll('input[name="pagamento"]').forEach(inp=>{
+    inp.addEventListener("change", ()=>{
+      const isPix=inp.value==="pix";
+      painelPix.classList.toggle("hidden",!isPix);
+      painelCartao.classList.toggle("hidden",isPix);
+      btnFinal.textContent=isPix ? "Verificar Pagamento" : "Finalizar Pagamento";
+    });
+  });
+
+  // ---------- Função QR Code ----------
+  function gerarQRCode(){
+    const random=Math.floor(Math.random()*10000);
+    qrDiv.innerHTML=`<img src="Imagens/qr_code.jpg?rand=${random}" alt="QR Code PIX">`;
+    tempo=30;
+    btnGerarNovo.style.display="none";
+  }
+  qrDiv.addEventListener("click", gerarQRCode);
+  btnGerarNovo.addEventListener("click", gerarQRCode);
+  gerarQRCode();
+
+  // ---------- Timer PIX ----------
+  setInterval(()=>{
+    if(!painelPix.classList.contains("hidden")){
+      tempo--;
+      timerEl.textContent=tempo;
+      if(tempo<=0){
+        timerEl.textContent=0;
+        btnGerarNovo.style.display="block";
+      }
+    }
+  },1000);
+
+  // ---------- Resumo do Pedido ----------
+  function carregarResumoPedido(){
+    const carrinhoJSON=localStorage.getItem('carrinho');
+    const resumoDiv=document.getElementById('resumo-itens');
+    const totalSpan=document.getElementById('total-pagamento');
+
+    if(!carrinhoJSON){
+      resumoDiv.innerHTML='<p>Carrinho vazio.</p>';
+      totalSpan.textContent='0,00';
+      return;
+    }
+
+    const carrinho=JSON.parse(carrinhoJSON);
+    resumoDiv.innerHTML='';
+    let total=0;
+    carrinho.forEach(item=>{
+      const p=document.createElement('p');
+      p.textContent=`${item.qtd} x ${item.nome} - R$ ${(item.preco*item.qtd).toFixed(2).replace('.',',')}`;
+      resumoDiv.appendChild(p);
+      total += item.preco*item.qtd;
+    });
+    totalSpan.textContent=total.toFixed(2).replace('.',',');
+  }
+  carregarResumoPedido();
+
+  // ---------- Finalizar / Verificar Pagamento ----------
+  btnFinal.addEventListener("click", ()=>{
+    let valid=true;
+    ["nome-entrega","rua","numero","telefone"].forEach(id=>{
+      const el=document.getElementById(id);
+      el.classList.remove("input-erro");
+      if(!el.value.trim()){ el.classList.add("input-erro"); valid=false; }
+    });
+
+    // Validação simples de telefone
+    const telRegex=/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/;
+    if(!telRegex.test(telefoneInput.value)){ 
+      telefoneInput.classList.add("input-erro");
+      valid=false;
+      alert("Telefone inválido! Use o formato (00) 00000-0000");
+    }
+
+    if(!valid){ alert("Preencha todos os campos obrigatórios!"); return; }
+
+    const barra=document.getElementById("barra-loading");
+    const barraSpan=barra.querySelector("span");
+    barra.style.display="block"; barraSpan.style.width="0%";
+    let prog=0;
+    const interval=setInterval(()=>{
+      prog+=5;
+      barraSpan.style.width=prog+"%";
+      if(prog>=100){
+        clearInterval(interval);
+        barra.style.display="none";
+
+        // Mostrar tela de confirmação
+        confirmDiv.style.display="flex";
+
+        // Botão acompanhar entrega
+        btnAcompanhar.addEventListener("click", ()=>{
+          window.location.href="rastreamento.html";
+        });
+      }
+    },100);
+  });
+
+});
+</script>
+
+</body>
+</html>

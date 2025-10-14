@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin Hello Kitty</title>
+  <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>Painel Admin Hello Kitty</h1>
+  </header>
+
+  <section class="add-produto">
+    <h2>Adicionar/Editar Produto</h2>
+    <input type="text" id="nome-produto" placeholder="Nome do produto">
+    <input type="text" id="descricao-produto" placeholder="Descrição do produto">
+    <input type="text" id="preco-produto" placeholder="Preço (ex: 12,00)">
+    <input type="text" id="imagem-produto" placeholder="Caminho da imagem (ex: Imagens/drink.jpeg)">
+    <button onclick="adicionarProduto()">Adicionar Produto</button>
+  </section>
+
+  <section class="lista-produtos">
+    <h2>Produtos Cadastrados</h2>
+    <table id="tabela-produtos">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </section>
+
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.login-container, .admin-panel {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  background: #fff0f6;
+}
+
+h1, h2 {
+  color: #ff79c6;
+}
+
+input, button {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffcce7;
+  outline: none;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+  background: #ffb6c1;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff79c6;
+}
+
+.btn-voltar {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ffcce7;
+  padding: 10px;
+  text-align: center;
+}
+
+img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}

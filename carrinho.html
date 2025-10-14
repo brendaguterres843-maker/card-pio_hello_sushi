@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho - Hellkit</title>
+  <link rel="stylesheet" href="carrinho.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-content">
+      <img src="Imagens/Logo.jpeg" alt="Logo Hellkit" class="logo">
+      <h1>Seu Carrinho</h1>
+      <a href="index.html" class="btn-voltar">⬅ Voltar ao Cardápio</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+    <div class="painel">
+
+      <!-- COLUNA ESQUERDA: itens do carrinho -->
+      <section class="coluna-esquerda">
+        <div class="lista-itens">
+          <h2>Itens do Carrinho</h2>
+
+          <!-- Item de exemplo 1 -->
+          <div class="item-carrinho">
+            <img src="Imagens/sushi1.jpg" alt="Sushi Hell Roll" class="item-img">
+            <div class="item-info">
+              <h3>Sushi Hell Roll</h3>
+              <p>8 unidades com cream cheese e cebolinha</p>
+              <div class="quantidade-controls">
+                <button class="menos">−</button>
+                <span class="quantidade">1</span>
+                <button class="mais">+</button>
+              </div>
+              <span class="preco">28,90</span>
+            </div>
+          </div>
+
+          <!-- Item de exemplo 2 -->
+          <div class="item-carrinho">
+            <img src="Imagens/temaki1.jpg" alt="Temaki de Salmão" class="item-img">
+            <div class="item-info">
+              <h3>Temaki de Salmão</h3>
+              <p>Grande, com arroz e nori crocante</p>
+              <div class="quantidade-controls">
+                <button class="menos">−</button>
+                <span class="quantidade">1</span>
+                <button class="mais">+</button>
+              </div>
+              <span class="preco">22,50</span>
+            </div>
+          </div>
+
+          <!-- Botão limpar carrinho -->
+          <div class="center" style="margin-top:15px">
+            <button id="bt-limpar" class="btn btn-limpar">🗑 Limpar Carrinho</button>
+          </div>
+        </div>
+
+        <!-- Observações gerais -->
+        <div class="painel-aba" id="aba-editar">
+          <h2>Personalizar Pedido</h2>
+          <label for="obs">Observação adicional:</label>
+          <textarea id="obs" class="observacao" placeholder="Ex: entregar com hashis extras, sem molho picante..."></textarea>
+        </div>
+      </section>
+
+      <!-- COLUNA DIREITA: resumo do pedido -->
+      <aside class="painel-lateral">
+        <div class="resumo-total">
+          <h3>Resumo do Pedido</h3>
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <span>R$ <span id="total-valor">0,00</span></span>
+          </div>
+        </div>
+
+        <div class="botoes">
+          <button id="btn-fechar" class="btn btn-fechar">Fechar</button>
+          <a href="pagamento.html" id="btn-finalizar" class="btn btn-finalizar">Finalizar Pedido</a>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Hellkit © 2025 — Sabores que queimam na medida 🔥</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="carrinho.js" defer></script>
+</body>
+</html>

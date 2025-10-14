@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Hellkit</title>
+  <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Login Admin</h1>
+    <input type="password" id="senha-admin" placeholder="Digite a senha">
+    <button id="btn-login">Entrar</button>
+    <button id="btn-reset">Resetar Senha</button>
+    <p id="msg-login"></p>
+  </div>
+
+  <div class="admin-panel" style="display:none;">
+    <h1>Painel Admin</h1>
+
+    <div class="form-produto">
+      <input type="text" id="nome-produto" placeholder="Nome do produto">
+      <input type="text" id="descricao-produto" placeholder="Descrição do produto">
+      <input type="text" id="preco-produto" placeholder="Preço">
+      <input type="text" id="imagem-produto" placeholder="Caminho da imagem">
+      <button onclick="adicionarProduto()">Adicionar Produto</button>
+    </div>
+
+    <table id="tabela-produtos">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

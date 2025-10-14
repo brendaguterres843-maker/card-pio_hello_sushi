@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acompanhar Pedido - Hellkit</title>
+  <link rel="stylesheet" href="acompanhar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="header">
+    <img src="Imagens/Logo.jpeg" alt="Logo Hellkit" class="logo">
+    <h1>Acompanhar Pedido</h1>
+    <a href="index.html" class="btn-voltar"><i class="fas fa-arrow-left"></i> Cardápio</a>
+  </header>
+
+  <main class="container">
+
+    <section class="status-pedido">
+      <h2>Status do Pedido</h2>
+      <div class="timeline">
+        <div class="step active">
+          <i class="fas fa-receipt"></i>
+          <span>Recebido</span>
+        </div>
+        <div class="step">
+          <i class="fas fa-utensils"></i>
+          <span>Produção</span>
+        </div>
+        <div class="step">
+          <i class="fas fa-motorcycle"></i>
+          <span>Entrega</span>
+        </div>
+        <div class="step">
+          <i class="fas fa-check-circle"></i>
+          <span>Entregue</span>
+        </div>
+      </div>
+
+      <div class="timer">
+        <p>Tempo estimado de entrega:</p>
+        <span id="tempo-entrega">30:00</span>
+      </div>
+    </section>
+
+    <section class="detalhes-pedido">
+      <h2>Detalhes do Pedido</h2>
+      <ul id="detalhes-pedido"></ul>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Hellkit © 2025 — Sabores que queimam na medida 🔥</p>
+  </footer>
+
+  <script src="acompanhar.js" defer></script>
+</body>
+</html>
